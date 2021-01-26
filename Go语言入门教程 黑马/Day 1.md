@@ -22,7 +22,7 @@
 
   * ### 下载版本
 
-    ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1 图片\1.png)
+    ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\1.png)
 
   * ### 安装过程
 
@@ -35,7 +35,7 @@
 
   * ### Go语言环境测试
 
-    ![2](E:\selfgit\golang\Go语言入门教程 黑马\Day 1 图片\2.png)
+    ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\2.png)
 
   * ### LiteIDE安装
 
@@ -45,9 +45,11 @@
 
     * ### 版本
 
-      ![3](E:\selfgit\golang\Go语言入门教程 黑马\Day 1 图片\3.png)
+      ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\3.png)
 
-    * ![4](E:\selfgit\golang\Go语言入门教程 黑马\Day 1 图片\4.png)
+      
+
+    * ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\4.png)
 
       ctrl + r  运行代码
 
@@ -88,13 +90,11 @@
     2. 通过go build命令编译go文件
     3. 执行生成的exe即可成功运行程序
 
-    ![image-20210126111445582](E:\selfgit\golang\Go语言入门教程 黑马\Day 1 图片\5)
-
     * 方法二:
 
       直接通过go run test.go命令运行代码，该过程不会生成exe可执行程序
 
-      ![image-20210126111750668](E:\selfgit\golang\Go语言入门教程 黑马\Day 1 图片\6)
+      
 
 * # 基础类型
 
