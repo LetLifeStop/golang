@@ -22,9 +22,7 @@
 
   * ### 下载版本
 
-    图片示例
-
-    [图片示例]: https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/1.png	"图片示例"
+    [图片示例]: https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/1.png
 
     
 
