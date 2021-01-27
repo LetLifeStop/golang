@@ -1,4 +1,8 @@
-* # **Go语言介绍**
+* 
+
+* 
+
+* # Go语言介绍**
 
   * 为了让程序员有更高的生产效率，Go语言专门针对多处理器系统应用程序的编程进行了优化，使用Go语言不仅速度快，而且更加安全，支持并行进程
   * 优势
@@ -22,9 +26,7 @@
 
   * ### 下载版本
 
-    [图片示例]: https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/1.png
-
-    
+    [图片示例](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/1.png)
 
   * ### 安装过程
 
@@ -33,11 +35,11 @@
   * ### 判断是否安装完成
 
     * 通过cmd，调用go version 
-    * 调用go env
-
+  * 调用go env
+  
   * ### Go语言环境测试
 
-    ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\2.png)
+    [图片示例](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/2.png)
 
   * ### LiteIDE安装
 
@@ -47,20 +49,20 @@
 
     * ### 版本
 
-      ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\3.png)
+      [图片示例](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/3.png)
 
-      
+    * 运行测试
 
-    * ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\4.png)
-
+      [图片示例](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/4.png)
+    
       ctrl + r  运行代码
 
   * ## **学习资料**
 
     * Go语言官网： https://golang.org/
-    * Go中文社区：https://studygolang.com
+  * Go中文社区：https://studygolang.com
     * Go中文在线文档：https://studygolang.com/pkgdoc
-
+  
 * # 第一个Go程序
 
   ```go
