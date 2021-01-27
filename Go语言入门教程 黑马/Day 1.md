@@ -22,7 +22,9 @@
 
   * ### 下载版本
 
-    ![](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\1.png)
+  * 
+
+    ![1.png](E:\selfgit\golang\Go语言入门教程 黑马\Day 1.assets\1.png)
 
   * ### 安装过程
 
