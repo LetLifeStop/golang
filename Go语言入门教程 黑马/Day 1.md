@@ -1,8 +1,4 @@
-* 
-
-* 
-
-* # Go语言介绍**
+* # Go语言介绍
 
   * 为了让程序员有更高的生产效率，Go语言专门针对多处理器系统应用程序的编程进行了优化，使用Go语言不仅速度快，而且更加安全，支持并行进程
   * 优势
@@ -54,13 +50,13 @@
     * 运行测试
 
       [图片示例](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/4.png)
-    
-      ctrl + r  运行代码
-
-  * ## **学习资料**
+  
+      **学习资料**
 
     * Go语言官网： https://golang.org/
+
   * Go中文社区：https://studygolang.com
+    
     * Go中文在线文档：https://studygolang.com/pkgdoc
   
 * # 第一个Go程序
@@ -211,4 +207,56 @@
     }
     ```
 
+    枚举iota
+    
+    ```go
+    package main
+    
+    import "fmt"
+    
+    func main() {
+    	// iota常量自动生成器，从0开始，搁一行每次自动加1
+    	const (
+    		a = iota
+    		b = iota
+    		c = iota
+    	)
+    	fmt.Printf("a = %d, b = %d, c = %d\n", a, b, c)
+    	// a = 0, b = 1, c = 2
+    
+    	// iota遇到const，重置为0
+    	const d = iota
+    	fmt.Printf("d is %d\n", d)
+    	// d is 0
+    
+    	const (
+    		a1 = iota
+    		b1
+    		c1
+    	)
+    
+    	fmt.Printf("a1 = %d, b1 = %d, c1 = %d\n", a1, b1, c1)
+    	// a1 = 0, b1 = 1, c1 = 2
+    
+    	// 如果是同一行，值是相同的
+    	const (
+    		i          = iota
+    		j1, j2, j3 = iota, iota, iota
+    		k          = iota
+    	)
+    	fmt.Printf("i = %d, j1 = %d, j2 = %d, j3 = %d, k = %d\n",
+    		i, j1, j2, j3, k)
+    	// i = 0, j1 = 1, j2 = 1, j3 = 1, k = 2
+    }
+    
+    ```
+    
+  * ## 基础类型分类
+  
+    图片链接
+  
+    ps：[byte和rune的区别](https://www.jianshu.com/p/4fbf529926ca)，如果要存储汉字的话，byte存储不下，rune可以存储下。
+  
+    
+  
     
