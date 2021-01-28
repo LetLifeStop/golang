@@ -253,10 +253,146 @@
     
   * ## 基础类型分类
   
-    图片链接
+    [图片链接](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%201.assets/5.png)
   
     ps：[byte和rune的区别](https://www.jianshu.com/p/4fbf529926ca)，如果要存储汉字的话，byte存储不下，rune可以存储下。
   
-    
+    * 字符
   
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      	var ch byte
+      	ch = 97
+      	fmt.Printf("%c, %d\n", ch, ch)
+      	// a, 97
+      
+      	ch = 'a'
+      	fmt.Printf("%c, %d\n", ch, ch)
+      	// a, 97
+      
+      	fmt.Printf("大写: %d, 小写: %d\n", 'A', 'a')
+      	// 大写: 65, 小写: 97
+      
+      	fmt.Printf("大写转小写: %c\n", 'A'+32)
+      	// 大写转小写：a
+      
+      }
+      ```
     
+    * 字符串
+    
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      	var str string
+      
+      	// 字符串都是隐藏了一个结束符  '\0'
+      	str = "a"
+      	fmt.Println("str = ", str)
+      	// str = a
+      	
+      	str = "hello go"
+      	// 操作字符串的某个字符，下标从0开始
+      	fmt.Printf("str[0] = %c, str[1] = %c\n", str[0], str[1])
+      	// str[0] = h, str[1] = e
+      }
+      ```
+    
+    * 复数
+    
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      	var t complex128
+      	t = 2.1 + 3.14i
+      	fmt.Println("t = ", t)
+      	// t = (2.1 + 3.14i)
+      
+      	// 通过内建函数获取复数的实部和虚部
+      	fmt.Println("real(t) = ", real(t), "imag(t) = ", imag(t))
+      	// real(t) = 2.1 imag(t) = 3.14
+      }
+      ```
+    
+    * 格式化输出
+    
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      	a := 10
+      	b := "abc"
+      	c := 'a'
+      	d := 3.14
+      
+      	// 注意c的类型，对应的是acsii的值
+      	fmt.Printf("%T, %T, %T, %T\n", a, b, c, d)
+      	// int, string, int32, float64
+      
+      	fmt.Printf("a = %d, b = %s, c = %c, d = %f\n", a, b, c, d)
+      	// a = 10, b = abc, c = a, d = 3.140000
+      
+      	// %v是自动匹配格式，注意字符的格式以及float的表示
+      	fmt.Printf("a = %v, b = %v, c = %v, d = %v\n", a, b, c, d)
+      	// a = 10, b = abc, c = 97, d = 3.14
+      
+      }
+      ```
+    
+    * 类型转换
+    
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      
+      	// bool类型和int类型之间无法转换，即bool类型和int类型是不兼容类型
+      	// int类型和char类型直接可以转换，即int类型和char类型是兼容类型
+      	var ch byte
+      	// 字符类型本质上就是整型
+      	ch = 'a'
+      	// 类型转换，把ch对应的ascii取出之后转换成int，再给t赋值
+      	t := int(ch)
+      	fmt.Println("t = ", t)
+      	// t = 97
+      }
+      ```
+    
+    * 类型别名
+    
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      
+      	type bigint int64
+      	var x bigint = 100
+      
+      	fmt.Printf("x type is %T\n", x)
+      	// x type is main.bigint
+      
+      	type (
+      		myint int
+      		mystr string
+      	)
+      }
+      
+      ```
+    
+      
