@@ -395,4 +395,130 @@
       
       ```
     
+  * ## 流程控制
+  
+    * 选择结构
+  
+      ```go
+      // 1. go语言以包为单位
+      // 2. 每个文件必须先声明包
+      // 3. 程序必须有一个main包
+      package main
       
+      import "fmt"
+      
+      func main() { // 左括号必须和函数名同行
+      	// if支持一个初始化语句，初始化语句和判断条件通过分号隔开
+      	if a := 11; a == 10 {
+      		fmt.Println("a =", a)
+      	} else if a == 12 {
+      		fmt.Println("a = ", a)
+      	} else {
+      		fmt.Println("a = ", a)
+      	}
+      	// a = 11
+      }
+      ```
+  
+    * switch 
+  
+      ```go
+      // 1. go语言以包为单位
+      // 2. 每个文件必须先声明包
+      // 3. 程序必须有一个main包
+      package main
+      
+      import "fmt"
+      
+      func main() { // 左括号必须和函数名同行
+      	// go语言保留了break关键字，如果不写break关键字的话，默认包含
+      	num := 4
+      	switch num {
+      	case 1:
+      		fmt.Println("按下的是1楼")
+      	case 2:
+      		fmt.Println("按下的是2楼")
+      	case 3:
+      		fmt.Println("按下的是3楼")
+      	default:
+      		fmt.Printf("按下的是%d楼\n", num)
+      	}
+      	// 按下的是4楼
+          
+          // 如果不想跳出switch的话，可以通过添加fallthrough关键字，当匹配成功之后，该case以及后面的case中的操作都会直接执行
+          num := 2
+          // 支持一个初始化
+          // swtch num := 1; num{
+      	switch num {
+      	case 1:
+      		fmt.Println("按下的是1楼")
+      		fallthrough
+          // 还可以改成case 2，3，4 多种条件
+      	case 2:
+      		fmt.Println("按下的是2楼")
+      		fallthrough
+      	case 3:
+      		fmt.Println("按下的是3楼")
+      		fallthrough
+      	default:
+      		fmt.Printf("按下的是%d楼\n", num)
+      	}
+      	// 按下的是2楼
+          // 按下的是3楼
+          // 按下的是2楼
+      }
+      ```
+  
+    * 循环语句 range
+  
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+      	str := "abc"
+      	var i int = 0
+      	for i, data := range str {
+      		fmt.Printf("str[%d] = %c\n", i, data)
+      	}
+      
+      	for i := range str {
+      		fmt.Printf("str[%d] = %c\n", i, str[i])
+      	}
+      
+      	for i, _ = range str {
+      		fmt.Printf("str[%d] = %c\n", i, str[i])
+      	}
+          // 上述三个的输出相同
+      	// str[0] = a
+      	// str[1] = b
+      	// str[2] = c
+      }
+      
+      ```
+  
+    * goto
+  
+      ```go
+      package main
+      
+      import "fmt"
+      
+      func main() {
+          // goto只能在本函数中跳转
+      	fmt.Println("1")
+      	goto End
+      	fmt.Println("2")
+      End:
+      	fmt.Println("3")
+      	// 1
+          // 3
+      }
+      ```
+  
+  * ## 总结
+  
+    大部分和c++非常像，就是在语法方面会有所不同。
+  
+    
