@@ -84,4 +84,32 @@
     }
     ```
 
+  * 关于go语言中有返回值的函数需要留意的写法
+  
+    ```go
+    package main
     
+    import "fmt"
+    
+    // 这里的result代表函数返回值的名称
+    // 如果有返回值，那么必须在函数的内部添加return语句
+    // 函数名称，根据约定，函数名首字母小写为private，大写为public
+    func Myfunc() (result int) {
+    	result = 666
+    	return
+    }
+    
+    // 如果只有一个返回值，且不声明返回值变量，那么你可以省略
+    func Myfunc() int {
+    	return 666
+    }
+    
+    func main() {
+    
+    	ret := Myfunc()
+    	fmt.Println("ret = ", ret)
+        // ret = 666
+    }
+    ```
+  
+  * 
