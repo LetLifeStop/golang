@@ -112,4 +112,63 @@
     }
     ```
   
-  * 
+  * 函数类型
+  
+    ```go
+    package main
+    
+    import "fmt"
+    
+    func Add(a, b int) int {
+    	return a + b
+    }
+    
+    // FuncType为定义的函数名
+    // 这个函数名代表了func(int ,int) int 这个函数类型
+    type FuncType func(int, int) int
+    
+    func main() {
+        // 函数名代表的是一个变量，可以用来进行赋值
+    	var fTest FuncType = Add
+    	//fTest = Add
+    	result := fTest(1, 2)
+    	fmt.Println("result = ", result)
+    }
+    ```
+  
+  * 回调函数
+  
+    ```go
+    package main
+    
+    import "fmt"
+    
+    type FuncType func(int, int) int
+    
+    func Add(a, b int) int {
+    	return a + b
+    }
+    
+    func Del(a, b int) int {
+    	return a - b
+    }
+    
+    // 回调函数，fTets参数为函数类型，这个函数就是回调函数
+    // 多态，多种形态，调用同一个接口，不同的参数，可以实现不同的功能
+    func Calc(a, b int, fTest FuncType) (result int) {
+    	fmt.Println("Calc")
+    	result = fTest(a, b)
+        // 不建议写成 result = Add(a, b),这样就无法实现多态了
+    	return
+    }
+    
+    func main() {
+    	a := Calc(1, 1, Del)
+        // a := Calc(1, 1, Del)
+        
+    	fmt.Println("a = ", a)
+    }
+    
+    ```
+  
+    
