@@ -164,11 +164,68 @@
     
     func main() {
     	a := Calc(1, 1, Del)
-        // a := Calc(1, 1, Del)
-        
+        // a := Calc(1, 1, Add)
     	fmt.Println("a = ", a)
+    }
+    ```
+    
+  * 匿名函数与闭包
+  
+    ```go
+    package main
+    
+    import "fmt"
+    
+    func main() {
+    
+    	a := 10
+    	str := "123"
+    
+    	// 匿名函数，没有函数名称和定义
+    	f1 := func() {
+    		fmt.Println("a = ", a)
+    		fmt.Println("str = ", str)
+    		// a = 10
+    		// str = 123
+    	}
+    
+    	// 调用定义的匿名函数
+    	f1()
+    
+    	// 定义匿名函数并且调用
+    	func() {
+    		fmt.Printf("a = %d, str = %s\n", a, str)
+    		// a = 10, str = 123
+    	}()
+    
+    	// 带参数的匿名函数
+    	f2 := func(i, j int) {
+    		fmt.Printf("i = %d, j = %d\n", i, j)
+    		// i = 10, j = 20
+    	}
+    	f2(10, 20)
+    
+    	// 定义带参数的匿名函数，同时调用
+    	func(i, j int) {
+    		fmt.Printf("i = %d, j = %d\n", i, j)
+    		// i = 30, j = 40
+    	}(30, 40)
+    
+    	// 匿名函数，定义之后主动调用，并且有返回值
+    	x, y := func(i, j int) (max, min int) {
+    		if i > j {
+    			max, min = i, j
+    		} else {
+    			max, min = j, i
+    		}
+    		return
+    	}(50, 60)
+    
+    	fmt.Printf("x = %d, y = %d\n", x, y)
+    	// x = 60, y = 50
     }
     
     ```
   
     
+
