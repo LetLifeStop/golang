@@ -224,7 +224,96 @@
     	fmt.Printf("x = %d, y = %d\n", x, y)
     	// x = 60, y = 50
     }
+    ```
     
+  * 闭包的特点
+  
+    ```go
+    package main
+    
+    import "fmt"
+    
+    // 返回值为一个匿名函数，返回一个int类型的函数
+    func test() func() int {
+    	var x int
+    
+    	return func() int {
+    		x++
+    		return x * x
+    	}
+    }
+    
+    func main() {
+        // f来调用闭包函数
+        // f并不关心这些捕获了的变量和常量是否已经超出了作用域
+        // 只要还有闭包在使用它，这些变量就还会存在，并且记录值
+    	f := test()
+    	fmt.Println(f())
+    	// 1
+    	fmt.Println(f())
+    	// 4
+    	fmt.Println(f())
+    	// 9
+    	fmt.Println(f())
+    	// 16
+    	fmt.Println(f())
+    	// 25
+    
+    	f2 := test()
+    	fmt.Println(f2())
+    	// 1
+    	fmt.Println(f())
+    	// 36
+        
+        // f进行再次重新赋值，之前存储的值即不存在
+        f = test()
+    	fmt.Println(f())
+    	// 1
+    	fmt.Println(f())
+    	// 4
+    }
+    ```
+  
+  * defer的使用
+  
+    ```go
+    package main
+    
+    import "fmt"
+    
+    func test(x int) {
+    	var t int = 100 / x
+    	fmt.Println("t = ", t)
+    }
+    
+    func main() {
+    	// 按照最后进来的最先执行的原则
+    
+    	defer fmt.Println("111")
+    	// 如果函数出现问题，这个函数之前的defer也能按照顺序使用
+        // 对于这个函数的后面，因为这个程序按照这个流程已经在test函数卡住了，所以后面的defer就不会调用
+    	// test(0)
+    	// 111
+    	defer fmt.Println("222")
+    	defer fmt.Println("333")
+    	// 333
+    	// 222
+    	// 111
+    }
+    
+    
+    func main() {
+    
+    	defer fmt.Println("111")
+        // 但如果把test(0)改成defer test(0), 所有的defer都会调用, 即使这个test(0)有bug
+    	defer test(0)
+    	defer fmt.Println("222")
+    	defer fmt.Println("333")
+        
+    	// 333
+    	// 222
+    	// 111
+    }
     ```
   
     
