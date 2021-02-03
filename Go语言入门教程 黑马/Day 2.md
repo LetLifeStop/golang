@@ -316,5 +316,106 @@
     }
     ```
   
+  * defer和匿名函数结合使用
+  
+    ```go
+    package main
+    
+    import "fmt"
+    
+    func main01() {
+    	a := 10
+    	b := 20
+    
+    	defer func() {
+    		fmt.Printf("defer: a = %d, b = %d\n", a, b)
+    	}()
+    	// 函数的调用是在main结束之前
+    	// 但是这里的参数的值是main函数结束之前的a，b的值
+    	
+    	a = 11
+    	b = 22
+    	fmt.Printf("main: a = %d, b = %d\n", a, b)
+    
+    	// main: a = 11, b = 22
+    	// defer: a = 11, b = 22
+    }
+    
+    func main() {
+    	a := 10
+    	b := 20
+    
+    	defer func(a, b int) {
+    		fmt.Printf("defer: a = %d, b = %d\n", a, b)
+    	}(a, b)
+    	// 匿名函数虽然是在main函数结束之前被调用
+    	// 但是a，b的值作为函数参数的值是在该函数上方的代码中a，b的值
+    	
+    	a = 11
+    	b = 22
+    	fmt.Printf("main: a = %d, b = %d\n", a, b)
+    
+    	// main: a = 11, b = 22
+    	// defer: a = 10, b = 20
+    }
+    ```
+  
+  * 获取命令行参数
+  
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    	"os"
+    	// 需要引入新的包
+    )
+    
+    func main() {
+    	// 通过字符串的方法来接受用户传递的参数
+    	str_arg := os.Args
+    	
+    	n := len(str_arg)
+    	fmt.Println("len of str_arg is ", n)
+        
+        for k, v := range str_arg {
+    		fmt.Printf("the key is %d, the val is %s\n", k, v)
+    	}
+        // len of str_arg is  4
+    	// the key is 0, the val is test.exe
+    	// the key is 1, the val is 1
+    	// the key is 2, the val is 2
+    	// the key is 3, the val is 3
+    }
+    
+    ```
+  
+  * 局部变量
+  
+    ```go
+    package main
+    
+    import (
+    	"fmt"
+    )
+    
+    func main() {
+    
+    	{
+    		i := 10
+    		fmt.Println("i = ", i)
+    	}
+    
+    	if flag := 3; flag == 3 {
+    		fmt.Println("flag = ", flag)
+    	}
+    
+    	// 这一句是非法的，flag的作用域在上个if已经结束了
+    	//  当执行到定义变量时，才会开始分配空间，离开作用域自动释放
+    	flag = 4
+    }
+    
+    ```
+  
     
 
