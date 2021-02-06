@@ -468,9 +468,9 @@
 
     Go语言必须放在工作区中。工作区包含三个目录
 
-    * src目录: 通过代码包的形式组织并保存Go源码文件，比如.go, .c等
-    * pkg目录: 存放经过由go install 命令构建安装后的安装包（包含Go库源码文件）的.a归档文件
-    * bin目录: 与pkg类似，经过go install命令完成安装后，保存由Go命令源码文件生成的可执行文件
+    * src目录: 通过代码包的形式组织并保存Go源码文件，比如.go, .c等 （**需要自己创建**）
+    * pkg目录: 存放经过由go install 命令构建安装后的安装包（包含Go库源码文件）的.a归档文件（**自动生成**）
+    * bin目录: 与pkg类似，经过go install命令完成安装后，保存由Go命令源码文件生成的可执行文件（**自动生成**）
 
     src包含所有的源代码，pkg和bin目录无需手动创建；**需要特别注意**，只有当环境变量GOPATH只包含一个工作区的路径时，go install才会把命令源码安装当当前工作区的bin目录下。如果环境变量GOPATH中包含多个工作区的目录途径，当执行go install时就会失败，此时必须设置环境变量GOBIN
 
@@ -498,11 +498,11 @@
 
       修改环境变量为项目目录
 
-      图片1
+      [图片1](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/1.png)
 
       文件夹层次如下：
 
-      图片2
+      [图片2](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/2.png)
 
     * 同一个目录下包名必须一样，即package xxx
 
@@ -510,15 +510,15 @@
 
       * main.go
 
-        图片3
+        [图片3](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/3.png)
 
       * test.go
 
-        图片4
+        [图片4](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/4.png)
 
       * 运行结果
 
-        图片5
+        [图片5](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/4.png)
 
   * **不同级目录下的工程管理**
 
@@ -526,28 +526,65 @@
 
       * 文件夹层次如下：
 
-        图片6
+        [图片6](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/6.png)
 
-        图片7
+        [图片7](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/7.png)
 
     * 文件中调用不同包里面的函数，格式为：包名.函数名()
 
       * 程序代码如下：
 
-        图片8
+        [图片8](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/8.png)
 
-        图片9
+        [图片9](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/9.png)
 
     * 调用别的包的函数，这个包中的函数如果首字母为小写，其余的包则无法使用该包中的函数；如果首字母为大写，其余的包则能调用该包中的函数。
 
     * 在调节环境变量的时候，为了减少工作量，可以通过如下形式进行环境变量的配置
 
-      图片10
+      [图片10](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/10.png)
 
-      图片11
+      [图片11](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%202.assets/11.png)
 
       勾选**编译目录使用自定义GOPATH**，**自定义GPOPATH**，然后将项目路径复制到空框中即可。
 
-      
+  * initial函数的介绍
+
+    图片12
+
+    * 如果main.go导入一个包，程序会先调用包中的init函数，然后再调用本身的init函数，之后再调用main函数
+    * 如果要忽略掉一个包，即将这个包的别名设置为 _ ,这样可以实现不调用包中的函数，而只调用该包中的init函数
+
+  * go_install命令
+
+    可以用来生成pck目录和bin目录，黑马上的教程没有试验成功，从github上找了一个解决办法成功了。解决办法是两个目录分别通过go install命令生成
+
+    * 设置GOPATH和GOBIN
+
+      首先说一下文件夹目录
+
+      E:
+
+      图片13
+
+      图片14
+
+      GOPATH和GOBIN的设置
+
+      图片15
+
+    * 通过go install命令生成pkg目录
+
+      ```cmd
+      E:\gocode\src\differ_project\src\calc> go install
+      ```
+
+    * 通过go install命令生成src目录
+
+      ```cmd
+      E:\gocode\src\differ_project\src> go install
+      ```
+
+      **注意两个命令的使用目录是不同的，pkg是到对应的包中使用，src是到项目的src目录下使用。**
 
   
