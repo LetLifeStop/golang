@@ -16,7 +16,7 @@
   	// &a = 0x11c0a1a0
       
   	// 指针类型可以保存某个变量的地址，p是int*类型的变量
-  	// *int保存int的地址，**int保存*int的地址etc
+  	// *int保存int的地址，**int保存*int的地址，etc
   	var p *int
   	p = &a
   	*p = 666
@@ -105,7 +105,77 @@
       e := [3][4]int{1: {5, 6, 7, 8}}
   	fmt.Println("e = ", e)
       // e =  [[0 0 0 0] [5 6 7 8] [0 0 0 0]]
+      
+      // 支持比较， 支持 == 和 !=，比较对象包含类型，size，还有每一个值的大小
+    // 支持同类型的数组可以赋值
+      a := [3][4]int{1: {5, 6, 7, 8}}
+  	b := [3][4]int{1: {5, 6, 7, 8}}
+  	fmt.Println("a == b", a == b)
+      // a == b true
   }
+  ```
+  
+* [随机数的使用](https://studygolang.com/pkgdoc)
+
+  ```go
+  package main
+  
+  import (
+  	"fmt"
+  	"math/rand"
+  	_ "time"
+  )
+  
+  func main() {
+  
+  	// 设置种子，只需要一次
+  	// 如果每一次的种子参数是不变的，那么每次程序运行产生的随机数都是相同的
+  	rand.Seed(123)
+  	
+      // 将种子设置为时间，这样可以保证每一次rand出来的结果不同
+      rand.Seed(time.Now().UnixNano())
+      
+  	for i := 0; i < 3; i++ {
+  		fmt.Println("rand = ", rand.Int31())
+  		/*
+  		rand =  1248369035
+  		rand =  56316249
+  		rand =  536805403
+  		*/
+  		
+          fmt.Println("rand = ", rand.Int31n(100))
+          // 限制每一次rand
+  	}
+  
+  }
+  
+  ```
+
+* 冒泡排序
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func swap(t1, t2 *int) {
+  	*t1, *t2 = *t2, *t1
+  }
+  
+  func main() {
+  	var a [6]int = [6]int{1, 5, 2, 3, 8, 7}
+  
+  	for i := 0; i < 6; i++ {
+  		for j := i + 1; j < 6; j++ {
+  			if a[i] > a[j] {
+  				swap(&a[i], &a[j])
+  			}
+  		}
+  	}
+  
+  	fmt.Println("a = ", a)
+  }
+  
   ```
 
   
