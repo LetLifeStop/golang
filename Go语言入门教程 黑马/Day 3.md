@@ -24,7 +24,7 @@
   }
   ```
 
-* 地址传递
+* ## 地址传递
 
   ```go
   package main
@@ -45,7 +45,7 @@
   }
   ```
   
-* 数组定义，size必须为常量，但是下标可以通过变量访问
+* ## 数组定义，size必须为常量，但是下标可以通过变量访问
 
   ```go
   package main
@@ -59,6 +59,7 @@
   	var pos int = 1
   	a[pos] = 1
       
+      // 数组作为函数参数时为值传递，形参的数组是实参的复制品
       var a [5]int = [5]int{1, 2, 3, 4, 5}
       
   	b := [5]int{1, 2, 3, 4, 5}
@@ -76,7 +77,7 @@
   }
   ```
 
-* 二维数组
+* ## 二维数组
 
   ```go
   package main
@@ -115,7 +116,7 @@
   }
   ```
   
-* [随机数的使用](https://studygolang.com/pkgdoc)
+* ## [随机数的使用](https://studygolang.com/pkgdoc)
 
   ```go
   package main
@@ -151,7 +152,7 @@
   
   ```
 
-* 冒泡排序
+* ## 冒泡排序
 
   ```go
   package main
@@ -178,4 +179,152 @@
   
   ```
 
+* 数组指针做函数参数
+
+  ```go
+   package main
   
+  import "fmt"
+  
+  func func1(a [5]int) {
+  	a[0] = 6
+  	fmt.Println("func1 a = ", a)
+  }
+  
+  func func2(a *[5]int) {
+  	(*a)[0] = 6
+  	fmt.Println("func2 a = ", *a)
+  }
+  
+  func main() {
+  	var a [5]int = [5]int{1, 2, 3, 4, 5}
+  
+  	func1(a)
+  	fmt.Println("After func1 a = ", a)
+  
+  	func2(&a)
+  	fmt.Println("After func2 a = ", a)
+  	/*
+      func1 a =  [6 2 3 4 5]
+  	After func1 a =  [1 2 3 4 5]
+  	func2 a =  [6 2 3 4 5]
+  	After func2 a =  [6 2 3 4 5]
+  	*/
+  }
+  ```
+
+* ## 切片
+
+   	切片并不是数组或者数组指针，它通过内部指针和相关的引用属性引用数组片段来实现变长的方案。
+
+  ​	slice并不是真正意义上的动态数组，只是一个引用类型
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+  	var a [5]int = [5]int{1, 2, 3, 4, 5}
+      // 1代表下标的起点，3代表下标的末尾点，按照左闭右开的原则
+  	// 4代表这个切片的容量为4 - 1 = 3
+      // 数组中的[]长度是固定的，但是slice的size是可以修改的
+  	array := a[1:3:4]
+  
+  	fmt.Println("array = ", array)
+      // 代表储存的元素个数
+  	fmt.Println("array len = ", len(array))
+  	// 代表这个slice总共能存储多少元素
+  	fmt.Println("array cap = ", cap(array))
+  	
+  	/*
+  	array =  [2 3]
+  	array len =  2
+  	array cap =  3
+  	*/
+  }
+  ```
+
+* ## 切片的创建
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+  	// 自动推导类型，同时对s1进行初始化
+  	s1 := []int{1, 2, 3, 4}
+  	fmt.Println("s1 = ", s1)
+  
+  	// 借助make函数创建slice，格式为make(切片类型，长度，容量)
+  	s2 := make([]int, 5, 10)
+  	fmt.Printf("len = %d, cap = %d\n", len(s2), cap(s2))
+  
+  	// 容量也可以省去，让编译器自动推导
+  	s3 := make([]int, 5)
+  	fmt.Printf("len = %d, cap = %d\n", len(s3), cap(s3))
+  }
+  ```
+
+* ## 切片的截取
+
+  ![image-20210216162821889](E:\selfgit\golang\Go语言入门教程 黑马\Day 3.assets\image-20210216162821889.png)
+
+* ## 切片和底层数组关系
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+  	s := []int{0, 1, 2, 3, 4, 5, 6, 7}
+  	
+  	// 修改切片的某个元素，也会修改对应的底层数组的元素
+  	s1 := s[2:5]
+  	fmt.Println(s1)
+  	// [2 3 4]
+  	s1[2] = 100
+  	fmt.Println(s1, s)
+  	// [2, 3, 100], [0, 1, 2, 3, 100, 5, 6, 7]
+  	
+  	s2 := s1[2:6]
+  	s2[3] = 200
+  	fmt.Println(s)
+  	// [0 1 2 3 100 5 6 200]
+  }
+  ```
+
+* ## append函数
+
+  ![image-20210216163704664](E:\selfgit\golang\Go语言入门教程 黑马\Day 3.assets\image-20210216163704664.png)
+
+* ## copy函数
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+  	s := []int{0, 1, 2, 3, 4, 5, 6, 7}
+  
+  	s1 := s[6:]
+  	// [6, 7]
+  	s2 := s[:5]
+  	// [0, 1, 2, 3, 4]
+  	// 函数原型为copy(dst, src), 复制长度以len小的为准
+  	// 从下标0开始，以len小的下标结束
+  	copy(s2, s1)
+  
+  	fmt.Println(s2)
+  	// [6, 7, 2, 3, 4]
+  	fmt.Println(s)
+  	// [6, 7, 2, 3, 4, 5, 6, 7]
+  }
+  ```
+
+* ## **切片做函数参数式**
+
+  通过引用传递的形式，注意和数组区分
