@@ -44,7 +44,7 @@
   	// main: a = 10, b = 20
   }
   ```
-  
+
 * ## 数组定义，size必须为常量，但是下标可以通过变量访问
 
   ```go
@@ -115,7 +115,7 @@
       // a == b true
   }
   ```
-  
+
 * ## [随机数的使用](https://studygolang.com/pkgdoc)
 
   ```go
@@ -215,7 +215,7 @@
 
 * ## 切片
 
-   	切片并不是数组或者数组指针，它通过内部指针和相关的引用属性引用数组片段来实现变长的方案。
+  切片并不是数组或者数组指针，它通过内部指针和相关的引用属性引用数组片段来实现变长的方案。
 
   ​	slice并不是真正意义上的动态数组，只是一个引用类型
 
@@ -269,7 +269,7 @@
 
 * ## 切片的截取
 
-  ![image-20210216162821889](E:\selfgit\golang\Go语言入门教程 黑马\Day 3.assets\image-20210216162821889.png)
+  [图片1](https://github.com/LetLifeStop/golang/blob/master/Go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20%E9%BB%91%E9%A9%AC/Day%203.assets/1.png)
 
 * ## 切片和底层数组关系
 
@@ -298,7 +298,7 @@
 
 * ## append函数
 
-  ![image-20210216163704664](E:\selfgit\golang\Go语言入门教程 黑马\Day 3.assets\image-20210216163704664.png)
+  图片2
 
 * ## copy函数
 
@@ -325,6 +325,216 @@
   }
   ```
 
-* ## **切片做函数参数式**
+* ## 切片做函数参数
 
-  通过引用传递的形式，注意和数组区分
+  切片做函数参数时是通过引用传递的形式实现的，注意切片和数组区分
+
+* ## Map
+
+  Go语言中的map是一种内置的数据结构，它是一个无序的kv集合
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+  	// int代表key类型，string代表value类型
+  	info := map[int]string{
+  		110: "mike",
+  		111: "yoyo",
+  		112: "lily"}
+  
+  	fmt.Println("info = ", info)
+  	// info =  map[110:mike 111:yoyo 112:lily]
+      
+      
+  }
+  
+  ```
+
+  **在一个map中所有的键都是唯一的，而且必须支持 == 和 != 操作符的类型，切片，函数以及包含切片的数据结构类型因为巨有引用的语义，所以不能用来作为映射的键**
+
+* ## Map的创建, 初始化
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+  
+  	m1 := make(map[int]string)
+  	fmt.Println("m1 = ", m1)
+  	fmt.Println("len = ", len(m1))
+  
+      // ·
+  	m2 := make(map[int]string, 10)
+  	fmt.Println("m1 = ", m2)
+  	fmt.Println("len = ", len(m2))
+      package main
+  
+  	m3 := map[int]string{1: "mike", 2: "go"}
+  	fmt.Println("m3 = ", m3)
+  	
+      for key, value := range m3 {
+  		fmt.Printf("%d ---> %s\n", key, value)
+  	}
+  	/*
+  	m1 =  map[]
+  	len =  0
+  	m1 =  map[]
+  	len =  0
+  	m3 =  map[1:mike 2:go] 
+  	for key, value := range m {
+  		fmt.Printf("%d ---> %s\n", key, value)
+  	}
+  	m =  map[1:mike 2:go]
+  	1 ---> mike
+  	2 ---> go
+  	*/
+      
+      m4 := map[int]string{1: "mike", 2: "go"}
+  
+	// 如何判断一个key是否存在
+  	// 第一个返回值为key所对应的value，第二个返回值为key是否存在的条件
+  	value, ok := m4[1]
+  	if ok == true {
+  		fmt.Println("m4[1] = ", value)
+  	} else {
+  		fmt.Println("key 不存在")
+  	}
+      // m4[1] =  mike
+      
+      // 删除key为1的内容
+      delete(m3, 1)
+  }
+  ```
+  
+* ## map作为函数参数的时候是引用传递
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func test(m map[int]string) {
+  	delete(m, 2)
+  }
+  
+  func main() {
+  	m := map[int]string{1: "mike", 2: "yoyo"}
+  	fmt.Println("m = ", m)
+  	// m =  map[1:mike 2:yoyo]
+  	test(m)
+  	fmt.Println("m = ", m)
+  	// m =  map[1:mike]
+  }
+  
+  ```
+
+* ## 结构体普通变量，指针变量初始化
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  type Student struct {
+  	id   int
+  	name string
+  	sex  byte
+  }
+  
+  func main() {
+      // 顺序初始化，每个成员必须初始化
+  	var s1 Student = Student{1, "test1", 'm'}
+  	fmt.Println("s1 = ", s1)
+  	// s1 =  {1 test1 109}
+      
+      // 指定成员初始化，没有初始化的成员自动赋值为0
+  	s2 := Student{name: "test2"}
+  	fmt.Println("s2 = ", s2)
+      // s2 =  {0 test2 0}
+      
+      // 指针变量初始化
+      var s3 *Student = &Student{name: "test3"}
+  	fmt.Println("s2 = ", *s3)
+  	// s2 =  {0 test3 0}
+  }
+  ```
+
+* ## 结构体成员的使用：指针变量
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  type Student struct {
+  	id   int
+  	name string
+  	sex  byte
+  }
+  
+  func main() {
+  	var s Student
+  	var p1 *Student = &s
+  
+      // 通过指针操作成员 p1.id和(*p1).name完全等价
+  	p1.id = 1
+  	(*p1).name = "test"
+  
+  	fmt.Println("*p1 = ", *p1)
+  	// *p1 =  {1 test 0}
+  }
+  ```
+
+* ## 结构体的比较
+
+  ​	同类型的结构体之间可以相互赋值，结构体之间比较支持 == 和 != 符号，但是不支持 < 或者 > 
+
+* ## 结构体做函数参数
+
+  ​	是通过值传递的形式实现，所以函数内部对函参进行修改，不会对原结构体产生影响
+
+  ​	可以通过引用传递的形式实现函数对原参数做改变
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  type Student struct {
+  	id   int
+  	name string
+  	sex  byte
+  }
+  
+  func test(p *Student) {
+  	p.id = 2
+  	fmt.Println("*p = ", *p)
+  	// *p =  {2 test 0}
+  }
+  
+  func main() {
+  	var s Student
+  	var p1 *Student = &s
+  
+  	p1.id = 1
+  	(*p1).name = "test"
+  
+  	test(&s)
+  
+  	fmt.Println("*p1 = ", *p1)
+  	// *p1 =  {2 test 0}
+  }
+  ```
+
+* ## Go语言可见性验证
+
+  ​	如果想使用别的包的函数，结构体类型，结构体成员。函数名，类型名，结构体成员变量名，首字母**必须大写**。如果首字母是小写，那只能在同一个包里使用
+
+  
+
+  
